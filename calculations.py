@@ -27,3 +27,9 @@ def smaclose(df, s, f):
     df['lbrosc'] = df['fast_sma'] - df['slow_sma']
     df['lbrosc_signal'] = df['lbrosc'].rolling(16).mean()
     return df
+
+
+def simpletrend(df, t):
+    df['simplesma'] = df['Close'].rolling(t).mean()
+    #yesterday did it close above or below the sma
+    return df
