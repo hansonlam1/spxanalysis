@@ -27,6 +27,7 @@ df['daydirection'] = df.apply(lambda x: calc.daydir(x['Open'], x['Close']),
                     axis=1)
 df = calc.opengap(df)
 df = calc.smaclose(df, 10, 3)
+df = calc.simpletrend(df, 50)
 df.shape
 
 # how often do gaps fill for different sized gaps
@@ -35,7 +36,7 @@ df.shape
 # how many up and down days in a row occur
 #df = df[(df['gapclosed'] == True) & (df['opengap_perc'] < 0.5)]
 #df = df[(df['opengap_perc'] < -0.3) | (df['opengap_perc'] > 0.3)]
-df.head(20)
+df.head(60)
 table = pd.pivot_table(df, index=['gapclosed'], aggfunc='count')
 table
  

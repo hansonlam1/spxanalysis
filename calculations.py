@@ -32,4 +32,5 @@ def smaclose(df, s, f):
 def simpletrend(df, t):
     df['simplesma'] = df['Close'].rolling(t).mean()
     #yesterday did it close above or below the sma
+    df['uptrend'] = (df['Close'].shift() > df['simplesma'])
     return df
