@@ -26,8 +26,8 @@ df.sort_values(by=['Date'], inplace=True, ascending=True)
 df['daydirection'] = df.apply(lambda x: calc.daydir(x['Open'], x['Close']),
                     axis=1)
 df = calc.opengap(df)
-df = calc.smaclose(df, 10, 3)
-df = calc.simpletrend(df, 50)
+#df = calc.smaclose(df, 10, 3)
+#df = calc.simpletrend(df, 50)
 df.shape
 
 # how often do gaps fill for different sized gaps
