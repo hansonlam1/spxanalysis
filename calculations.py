@@ -12,6 +12,11 @@ def daydir(o_price, c_price):
     return direction
 
 
+def dayrange(high, low):
+    rng = high - low
+    return rng
+
+
 def opengap(df):
     # add a column with the opening gap
     df['opengap'] = df['Open'] - df['Close'].shift()

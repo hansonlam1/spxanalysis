@@ -16,19 +16,19 @@ for csvfile in os.listdir(PATH):
 
 df.drop_duplicates(subset=columns, keep='first', inplace=True)
 
-# convert date column
-# sort by date
+# convert date column and sort
 df['Date'] = pd.to_datetime(df['Date'])
 df.sort_values(by=['Date'], inplace=True, ascending=True)
 
 # calcs
-# add information
 df['daydirection'] = df.apply(lambda x: calc.daydir(x['Open'], x['Close']),
-                    axis=1)
+    axis=1)
+df['dayrange'] = df.apply(lambda x: calc.dayrange(x['High'], x['Low']),
+    axis=1)
 df = calc.opengap(df)
 #df = calc.smaclose(df, 10, 3)
 #df = calc.simpletrend(df, 50)
-df.shape
+df.head()
 
 # how often do gaps fill for different sized gaps
 # break down the fill scenarios
