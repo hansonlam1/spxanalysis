@@ -1,8 +1,8 @@
 import datetime
 import os
 import pandas as pd
-
 import calculations as calc
+
 
 PATH = './data/'
 
@@ -21,12 +21,9 @@ df['Date'] = pd.to_datetime(df['Date'])
 df.sort_values(by=['Date'], inplace=True, ascending=True)
 
 # calcs
-df['daydirection'] = df.apply(lambda x: calc.daydir(x['Open'], x['Close']),
-    axis=1)
-df['dayrange'] = df.apply(lambda x: calc.dayrange(x['High'], x['Low']),
-    axis=1)
-df['day8020'] = df.apply(lambda x: calc.day8020(x['Open'], x['High'], x['Low'], 
-    x['Close']),axis=1)
+df['daydirection'] = df.apply(lambda x: calc.daydir(x['Open'], x['Close']),axis=1)
+df['dayrange'] = df.apply(lambda x: calc.dayrange(x['High'], x['Low']),axis=1)
+df['nextday8020'] = df.apply(lambda x: calc.nextday8020(x['Open'], x['High'], x['Low'],x['Close']),axis=1)
 df = calc.opengap(df)
 #df = calc.smaclose(df, 10, 3)
 #df = calc.simpletrend(df, 50)
@@ -39,7 +36,7 @@ df.head()
 #df = df[(df['gapclosed'] == True) & (df['opengap_perc'] < 0.5)]
 #df = df[(df['opengap_perc'] < -0.3) | (df['opengap_perc'] > 0.3)]
 df.head(60)
-table = pd.pivot_table(df, index=['gapclosed'], aggfunc='count')
+table = pd.pivot_table(df, index=['nextday8020'], aggfunc='count')
 table
  
 #hist = df['opengap_perc'].plot(kind='hist',bins=50,figsize=(12,6))

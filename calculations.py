@@ -17,19 +17,23 @@ def dayrange(high, low):
     return rng
 
 
-def day8020(o,h,l,c):
+def nextday8020(o,h,l,c):
     min_perc = 0.20
     max_perc = 0.80
-    drng = h-c
-    o_perc = (o-l)/drng
-    c_perc = (c-l)/drng
-    if o > c and c_perc < min_perc and o_perc > max_perc:
-        d = 'long'
-    elif c > o and c_perc > max_perc and o_perc < min_perc::
-        d = 'short'
-    else:
+    dayrange = h - l
+    # if dayrange is 0 no need to calc
+    if dayrange == 0:
         d = 'no setup'
-
+    else:
+        o_perc = (o - l)/dayrange
+        c_perc = (c - l)/dayrange
+    
+        if o > c and c_perc < min_perc and o_perc > max_perc:
+            d = 'long'
+        elif c > o and c_perc > max_perc and o_perc < min_perc:
+            d = 'short'
+        else:
+            d = 'no setup'
     return d
 
 
