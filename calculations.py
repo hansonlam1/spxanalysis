@@ -17,6 +17,22 @@ def dayrange(high, low):
     return rng
 
 
+def day8020(o,h,l,c):
+    min_perc = 0.20
+    max_perc = 0.80
+    drng = h-c
+    o_perc = (o-l)/drng
+    c_perc = (c-l)/drng
+    if o > c and c_perc < min_perc and o_perc > max_perc:
+        d = 'long'
+    elif c > o and c_perc > max_perc and o_perc < min_perc::
+        d = 'short'
+    else:
+        d = 'no setup'
+
+    return d
+
+
 def opengap(df):
     # add a column with the opening gap
     df['opengap'] = df['Open'] - df['Close'].shift()
