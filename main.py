@@ -4,7 +4,7 @@ import pandas as pd
 import calculations as calc
 
 
-PATH = './data/'
+PATH = './data/spx'
 
 columns = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume','Adjustment']
 df = pd.DataFrame(columns=columns)
@@ -25,9 +25,9 @@ df['daydirection'] = df.apply(lambda x: calc.daydir(x['Open'], x['Close']),axis=
 df['dayrange'] = df.apply(lambda x: calc.dayrange(x['High'], x['Low']),axis=1)
 df['nextday8020'] = df.apply(lambda x: calc.nextday8020(x['Open'], x['High'], x['Low'],x['Close']),axis=1)
 df = calc.opengap(df)
-#df = calc.smaclose(df, 10, 3)
+df = calc.smaclose(df, 10, 3)
 #df = calc.simpletrend(df, 50)
-df.head()
+#df.head()
 
 # how often do gaps fill for different sized gaps
 # break down the fill scenarios
