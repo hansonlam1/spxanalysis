@@ -49,12 +49,14 @@ def opengap(df):
 def smaclose(df, s, f):
     df['fast_sma'] = df['Close'].rolling(f).mean()
     df['slow_sma'] = df['Close'].rolling(s).mean()
+    #also includes an indicator based on something I read from Linda Raschke
     df['lbrosc'] = df['fast_sma'] - df['slow_sma']
     df['lbrosc_signal'] = df['lbrosc'].rolling(16).mean()
     return df
 
 
 def simpletrend(df, t):
+    #add a sma
     df['simplesma'] = df['Close'].rolling(t).mean()
     #yesterday did it close above or below the sma
     df['uptrend'] = (df['Close'].shift() > df['simplesma'])
