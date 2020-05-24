@@ -21,14 +21,19 @@ df['Date'] = pd.to_datetime(df['Date'])
 df.sort_values(by=['Date'], inplace=True, ascending=True)
 
 # calcs
-df['daydirection'] = df.apply(lambda x: calc.daydir(x['Open'], x['Close']),axis=1)
-df['dayrange'] = df.apply(lambda x: calc.dayrange(x['High'], x['Low']),axis=1)
-df['nextday8020'] = df.apply(lambda x: calc.nextday8020(x['Open'], x['High'], x['Low'],x['Close']),axis=1)
+df['daydirection'] = df.apply(lambda x: calc.daydir(x['Open'], x['Close']),
+    axis=1)
+df['dayrange'] = df.apply(lambda x: calc.dayrange(x['High'],
+    x['Low']),axis=1)
+df['nextday8020'] = df.apply(lambda x: calc.nextday8020(x['Open'],
+    x['High'], x['Low'],x['Close']),axis=1)
 df = calc.opengap(df)
 df = calc.smaclose(df, 10, 3)
 #df = calc.simpletrend(df, 50)
-#df.head()
 
+# ----------------------------------------------------------------------
+# analyze the dataframe however you see fit here
+# ----------------------------------------------------------------------
 # how often do gaps fill for different sized gaps
 # break down the fill scenarios
 # is a SMA oscillator useful
