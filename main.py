@@ -4,7 +4,7 @@ import pandas as pd
 import calculations as calc
 
 
-PATH = './data/spx'
+PATH = './data/amzn/'
 
 columns = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume','Adjustment']
 df = pd.DataFrame(columns=columns)
