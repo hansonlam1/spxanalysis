@@ -31,13 +31,16 @@ df = calc.opengap(df)
 #df = calc.smaclose(df, 10, 3)
 #df = calc.simpletrend(df, 50)
 df.head(10)
-
+df.info()
 # ----------------------------------------------------------------------
 # analyze the dataframe however you see fit here
 # run trade ideas through
 # ----------------------------------------------------------------------
 # 8020 setup for the following day
-df = trade.trade8020(df)
+df['trade8020'] = df.apply(lambda x: trade.trade8020(x['Open'],
+    x['High'],x['Low'],x['Close'],x['nextday8020'].shift()
+    ,x['High'].shift(),x['Low'].shift(),x['Close'].shift())
+    ,axis=1)
 
 table = pd.pivot_table(df, index=['nextday8020'], aggfunc='count')
 table
